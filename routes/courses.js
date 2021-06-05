@@ -10,4 +10,14 @@ router.get("/courses", async (req, res) => {
   });
 });
 
+router.get("/courses/:id", async (req, res) => {
+  let course = await Course.getCourseById(req.params.id);
+
+  res.render("course", {
+    title: `Course ${course.course}`,
+    isCourses: true,
+    course,
+  });
+});
+
 module.exports = router;
