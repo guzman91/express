@@ -4,7 +4,7 @@ const Course = require("../models/course");
 
 router.get("/about", (req, res) => {
   res.render("about", {
-    title: "About",
+    title: "Add Course",
     isAbout: true,
   });
 });
