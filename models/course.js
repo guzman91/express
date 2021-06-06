@@ -1,7 +1,9 @@
 const id = require("uniqid");
 const path = require("path");
 const fs = require("fs");
+const util = require("util");
 const { rejects } = require("assert");
+const readFile = util.promisify(fs.readFile);
 
 class Course {
   constructor(course, prise, url) {
@@ -38,20 +40,13 @@ class Course {
     this.writeJSON(courses);
   }
 
-  static getAll() {
-    return new Promise((resolve, reject) => {
-      fs.readFile(
-        path.join(__dirname, "..", "data", "courses.json"),
-        "utf-8",
-        (err, content) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(JSON.parse(content));
-          }
-        }
-      );
-    });
+  static async getAll() {
+    const file = await readFile(
+      path.join(__dirname, "..", "data", "courses.json"),
+      "utf-8"
+    );
+
+    return JSON.parse(file);
   }
 
   static async getCourseById(id) {
