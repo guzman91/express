@@ -4,13 +4,11 @@ const fs = require("fs");
 const util = require("util");
 const { rejects } = require("assert");
 const readFile = util.promisify(fs.readFile);
+const writeFile = util.promisify(fs.writeFile);
 
 class Course {
   constructor(course, prise, url) {
-    (this.course = course),
-      (this.prise = prise),
-      (this.url = url),
-      (this.id = id());
+    (this.course = course), (this.prise = prise), (this.url = url), (this.id = id());
   }
 
   writeJSON(json) {
@@ -41,10 +39,7 @@ class Course {
   }
 
   static async getAll() {
-    const file = await readFile(
-      path.join(__dirname, "..", "data", "courses.json"),
-      "utf-8"
-    );
+    const file = await readFile(path.join(__dirname, "..", "data", "courses.json"), "utf-8");
 
     return JSON.parse(file);
   }
@@ -52,6 +47,16 @@ class Course {
   static async getCourseById(id) {
     let c = await Course.getAll();
     return c.find((i) => i.id === id);
+  }
+
+  static async editCourse(obj) {
+    let { course, prise, url, id } = obj;
+    let courses = await Course.getAll();
+    let index = await courses.findIndex((item) => item.id == id);
+    courses[index] = obj;
+    await writeFile(path.join(__dirname, "..", "data", "courses.json"), JSON.stringify(courses));
+
+    return courses;
   }
 }
 
