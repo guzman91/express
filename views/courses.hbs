@@ -13,9 +13,14 @@
             <span class="card-title course">{{course}}</span>
             <p class="price">{{prise}}</p>
           </div>
-          <div class="card-action">
+          <div class="card-action action">
             <a href="/courses/{{id}}">Open course</a>
             <a href="/courses/{{id}}/edit?allow=true">Edit</a>
+
+            <form action="/add" method="post">
+              <input type="hidden" name="id" value="{{id}}" />
+              <button class="btn waves-effect waves-light" type="submit">Buy</button>
+            </form>
           </div>
 
         </div>

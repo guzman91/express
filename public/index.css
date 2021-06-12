@@ -23,3 +23,9 @@
   margin-top: 10px;
   font-size: 25px;
 }
+
+.card-action.action {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

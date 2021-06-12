@@ -3,6 +3,7 @@ const exphbs = require("express-handlebars");
 const homeRouter = require("./routes/home");
 const aboutRouter = require("./routes/about");
 const coursesRouter = require("./routes/courses");
+const addRouter = require("./routes/add");
 const { urlencoded } = require("express");
 
 const app = express();
@@ -24,6 +25,7 @@ const PORT = process.env.PORT || 3000;
 app.use(homeRouter);
 app.use(aboutRouter);
 app.use(coursesRouter);
+app.use(addRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
