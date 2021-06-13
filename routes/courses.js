@@ -24,7 +24,7 @@ router.get("/courses/:id", async (req, res) => {
 
 router.post("/courses/edit", async (req, res) => {
   const course = await Course.editCourse(req.body);
-  console.log(course);
+  // console.log(course);
 
   res.redirect("/courses");
 });

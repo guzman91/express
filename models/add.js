@@ -15,7 +15,7 @@ class Add {
     if (isExist) {
       card.courses[idx].count++;
     } else {
-      course.count = 0;
+      course.count = 1;
       card.courses.push(course);
     }
     card.price += +course.prise;
@@ -25,6 +25,26 @@ class Add {
   static async fetch() {
     let card = await readFile(filePath, "utf-8");
     return JSON.parse(card);
+  }
+
+  static async delete(id) {
+    const cart = await Add.fetch();
+    let idx = await cart.courses.findIndex((item) => item.id == id);
+    let coursePrice = await cart.courses[idx].prise;
+    // console.log("coursePrice", coursePrice);
+    // console.log("idx", idx);
+
+    // console.log("newArray", newArray);
+    if (cart.courses[idx].count == 1) {
+      cart.courses = await cart.courses.filter((item) => {
+        return item.id !== id;
+      });
+    } else {
+      cart.courses[idx].count--;
+    }
+    cart.price -= coursePrice;
+    await writeFile(filePath, JSON.stringify(cart));
+    return JSON.stringify(cart);
   }
 }
 

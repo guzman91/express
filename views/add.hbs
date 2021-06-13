@@ -1,1 +1,29 @@
-<h1>Your Shopping Cart is empty</h1>
+<div id="remove">
+  {{#if cart.courses.length}}
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Count</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each cart.courses}}
+
+          <tr>
+            <td>{{course}}</td>
+            <td>{{count}}</td>
+            <td><a class="waves-effect waves-light btn remove-btn" data-id="{{id}}">Delete</a></td>
+          </tr>
+
+        {{/each}}
+      </tbody>
+    </table>
+    <div class="cart-price">
+      <p class="label">Total amount: </p><p class="price">{{cart.price}}</p>
+    </div>
+  {{else}}
+    <h1>Your Shopping Cart is empty</h1>
+  {{/if}}
+</div>
