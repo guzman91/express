@@ -38,3 +38,7 @@
 .cart-price {
   display: flex;
 }
+
+.edit-form {
+  margin-bottom: 1rem;
+}

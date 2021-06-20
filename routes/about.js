@@ -9,12 +9,19 @@ router.get("/about", (req, res) => {
   });
 });
 
-router.post("/about", (req, res) => {
-  const course = new Course(req.body.Course, req.body.Price, req.body.File_URL);
+router.post("/about", async (req, res) => {
+  const course = new Course({
+    title: req.body.course,
+    price: req.body.price,
+    url: req.body.file_URL,
+  });
 
-  course.save();
-
-  res.redirect("/about");
+  try {
+    await course.save();
+    res.redirect("/about");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;
