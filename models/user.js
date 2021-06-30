@@ -29,7 +29,6 @@ const userSchema = new Schema({
 
 userSchema.methods.addToCart = async function (course) {
   const items = this.cart.items.concat([]);
-  // console.log("course", course);
   const idx = await items.findIndex((c) => {
     return c.course.toString() == course._id.toString();
   });
@@ -48,7 +47,25 @@ userSchema.methods.addToCart = async function (course) {
 };
 
 userSchema.methods.removeFromCart = async function (course) {
-  console.log("this", this);
+  let items = this.cart.items.concat([]);
+  const idx = await items.findIndex((c) => {
+    return c.course.toString() == course._id.toString();
+  });
+  if (items[idx].count == 1) {
+    items = items.filter((i) => i.course.toString() !== course._id.toString());
+  } else {
+    items[idx].count--;
+  }
+  this.cart = { items };
+  console.log("this.cart", this.cart);
+  return this.save();
+};
+
+userSchema.methods.clearCart = async function () {
+  this.cart = { items: [] };
+  this.save();
+
+  //console.log("this.cart.items", this.cart.items);
 };
 
 module.exports = model("User", userSchema);

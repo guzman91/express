@@ -19,14 +19,14 @@ if (course) {
         method: "delete",
       })
         .then((response) => response.json())
-        .then((result) => {
-          let res = JSON.parse(result);
-          if (res.courses.length) {
-            let newArray = res.courses.map((item) => {
+        .then((res) => {
+          //let res = JSON.parse(result);
+          //console.log("result", res);
+          if (res.userCart.length) {
+            let newArray = res.userCart.map((item) => {
               let coub = `
-              
             <tr>
-              <td>${item.course}</td>
+              <td>${item.title}</td>
               <td>${item.count}</td>
               <td><a class="waves-effect waves-light btn remove-btn" data-id="${item.id}">Delete</a></td>
             </tr>
@@ -34,7 +34,7 @@ if (course) {
               return coub;
             });
             course.querySelector("tbody").innerHTML = newArray.join("");
-            course.querySelector(".price").textContent = toCurrency(res.price);
+            course.querySelector(".price").textContent = toCurrency(res.cartAmount);
           } else {
             course.innerHTML = "<h1>Your Shopping Cart is empty</h1>";
           }

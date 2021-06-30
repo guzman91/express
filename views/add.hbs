@@ -23,6 +23,10 @@
     <div class="cart-price">
       <p class="label">Total amount: </p><p class="price">{{cartAmount}}</p>
     </div>
+
+    <form action="/orders" method="post">
+      <button class="btn" type="submit">Order</button>
+    </form>
   {{else}}
     <h1>Your Shopping Cart is empty</h1>
   {{/if}}
