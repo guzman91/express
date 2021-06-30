@@ -14,6 +14,7 @@ router.post("/about", async (req, res) => {
     title: req.body.course,
     price: req.body.price,
     url: req.body.file_URL,
+    userID: req.user,
   });
 
   try {

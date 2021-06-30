@@ -31,10 +31,6 @@ class Add {
     const cart = await Add.fetch();
     let idx = await cart.courses.findIndex((item) => item.id == id);
     let coursePrice = await cart.courses[idx].prise;
-    // console.log("coursePrice", coursePrice);
-    // console.log("idx", idx);
-
-    // console.log("newArray", newArray);
     if (cart.courses[idx].count == 1) {
       cart.courses = await cart.courses.filter((item) => {
         return item.id !== id;

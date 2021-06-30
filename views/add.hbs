@@ -1,5 +1,5 @@
 <div id="remove">
-  {{#if cart.courses.length}}
+  {{#if userCart.length}}
     <table>
       <thead>
         <tr>
@@ -9,10 +9,10 @@
         </tr>
       </thead>
       <tbody>
-        {{#each cart.courses}}
+        {{#each userCart}}
 
           <tr>
-            <td>{{course}}</td>
+            <td>{{title}}</td>
             <td>{{count}}</td>
             <td><a class="waves-effect waves-light btn remove-btn" data-id="{{id}}">Delete</a></td>
           </tr>
@@ -21,7 +21,7 @@
       </tbody>
     </table>
     <div class="cart-price">
-      <p class="label">Total amount: </p><p class="price">{{cart.price}}</p>
+      <p class="label">Total amount: </p><p class="price">{{cartAmount}}</p>
     </div>
   {{else}}
     <h1>Your Shopping Cart is empty</h1>
