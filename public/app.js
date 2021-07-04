@@ -5,8 +5,23 @@ let toCurrency = (price) => {
   }).format(price);
 };
 
+let toDate = (date) => {
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+  }).format(Date.parse(date));
+};
+
 document.querySelectorAll(".price").forEach((price) => {
   price.textContent = toCurrency(price.textContent);
+});
+
+document.querySelectorAll(".date").forEach((date) => {
+  date.textContent = toDate(date.textContent);
 });
 
 let course = document.querySelector("#remove");

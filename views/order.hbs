@@ -1,1 +1,22 @@
 <h1>Orders</h1>
+
+{{#if userOrders.length}}
+  <div class="center">
+    {{#each userOrders}}
+      <div class="orders">
+        <p>Client name: {{userName}}</p>
+        <p>Order id: {{_id}}</p>
+        <p class="date">{{date}}</p>
+        <hr />
+        {{#each courses}}
+          <p>{{title}} (x{{count}})</p>
+        {{/each}}
+        <hr />
+        <p class="price">{{price}}</p>
+      </div>
+
+    {{/each}}
+  </div>
+
+{{else}}
+{{/if}}

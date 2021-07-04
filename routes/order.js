@@ -7,11 +7,19 @@ router.get("/orders", async (req, res) => {
   try {
     const orders = await Order.find({
       "user.userID": req.user._id,
-    }).populate("user.userID");
+    })
+      .populate("user.userID")
+      .lean();
+
+    //console.log("orders", orders);
 
     const userOrders = orders.map((i) => {
       return {
-        orders,
+        userName: i.user.name,
+        _id: i._id,
+        courses: i.courses,
+        date: i.date,
+        //orders,
         price: i.courses.reduce((sum, current) => {
           return (sum += current.price * current.count);
         }, 0),
