@@ -2,11 +2,12 @@ const { Router } = require("express");
 const order = require("../models/order");
 const router = Router();
 const Order = require("../models/order");
+const isAuth = require("../middleware/auth");
 
-router.get("/orders", async (req, res) => {
+router.get("/orders", isAuth, async (req, res) => {
   try {
     const orders = await Order.find({
-      "user.userID": req.user._id,
+      "user.userID": req.session.user._id,
     })
       .populate("user.userID")
       .lean();

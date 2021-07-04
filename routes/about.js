@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const router = Router();
 const Course = require("../models/course");
+const isAuth = require("../middleware/auth");
 
-router.get("/about", (req, res) => {
+router.get("/about", isAuth, (req, res) => {
   res.render("about", {
     title: "Add Course",
     isAbout: true,

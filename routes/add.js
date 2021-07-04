@@ -1,7 +1,7 @@
 const { Router } = require("express");
 //const course = require("../models/course");
 const router = Router();
-const Course = require("../models/course");
+const isAuth = require("../middleware/auth");
 
 function mapUserCart(array) {
   return array.map((item) => ({
@@ -25,7 +25,7 @@ router.post("/add", async (req, res) => {
   res.redirect("/add");
 });
 
-router.get("/add", async (req, res) => {
+router.get("/add", isAuth, async (req, res) => {
   const user = await req.user.populate("cart.items.course", "title price").execPopulate();
 
   const userCart = mapUserCart(user.cart.items);
