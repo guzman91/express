@@ -5,6 +5,8 @@ let toCurrency = (price) => {
   }).format(price);
 };
 
+var instance = M.Tabs.init(document.querySelectorAll(".tabs"));
+
 let toDate = (date) => {
   return new Intl.DateTimeFormat("en-US", {
     year: "numeric",

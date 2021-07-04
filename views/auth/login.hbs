@@ -1,0 +1,63 @@
+<div class="auth">
+
+  <div class="col s12">
+    <ul class="tabs">
+      <li class="tab col s6"><a class="active" href="#login">Sign In</a></li>
+      <li class="tab col s6"><a href="#register">Create Account</a></li>
+
+    </ul>
+  </div>
+  <div id="login" class="col s6 offset-s3">
+    <form action="/auth/login" method="POST">
+      <h3>Log In</h3>
+      <div class="input-field col s6">
+        <input name="email" id="email" type="email" class="validate" required />
+        <label for="email">Email</label>
+        <span class="helper-text" data-error="Please enter correct email address"></span>
+      </div>
+
+      <div class="input-field col s6">
+        <input name="password" id="password" type="password" class="validate" required />
+        <label for="password">Password</label>
+        <span class="helper-text" data-error="Please enter password"></span>
+      </div>
+
+      <button class="waves-effect waves-light btn" type="submit">Submit
+      </button>
+
+    </form>
+  </div>
+  <div id="register" class="col s6 offset-s3">
+    <form action="/auth/register" method="POST">
+      <h3>Create Account</h3>
+      <div class="input-field col s6">
+        <input name="remail" id="remail" type="email" class="validate" required />
+        <label for="remail">Email</label>
+        <span class="helper-text" data-error="Please enter correct email address"></span>
+      </div>
+
+      <div class="input-field col s6">
+        <input name="rpassword" id="rpassword" type="password" class="validate" required />
+        <label for="rpassword">Password</label>
+        <span class="helper-text" data-error="Please enter password"></span>
+      </div>
+
+      <div class="input-field col s6">
+        <input
+          name="rconfirm-password"
+          id="rconfirm-password"
+          type="password"
+          class="validate"
+          required
+        />
+        <label for="rconfirm-password">Confirm Password</label>
+        <span class="helper-text" data-error="Please confirm password"></span>
+      </div>
+
+      <button class="waves-effect waves-light btn" type="submit">Create
+      </button>
+
+    </form>
+  </div>
+
+</div>

@@ -5,9 +5,12 @@ const aboutRouter = require("./routes/about");
 const coursesRouter = require("./routes/courses");
 const addRouter = require("./routes/add");
 const orderRouter = require("./routes/order");
+const loginRouter = require("./routes/login");
+const authMiddleware = require("./middleware/variables");
 const mongoose = require("mongoose");
 const User = require("./models/user");
 const { urlencoded } = require("express");
+const session = require("express-session");
 
 const app = express();
 
@@ -32,6 +35,15 @@ app.use(async (req, res, next) => {
 
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(authMiddleware);
 
 const PORT = process.env.PORT || 3000;
 
@@ -70,17 +82,9 @@ async function start() {
 
 start();
 
-/*const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://jora:<password>@cluster0.n0udu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});*/
-
 app.use(homeRouter);
 app.use(aboutRouter);
 app.use(coursesRouter);
 app.use(addRouter);
 app.use(orderRouter);
+app.use(loginRouter);
