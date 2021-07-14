@@ -58,7 +58,6 @@ router.post("/orders", async (req, res) => {
 
       courses: userOrder,
     });
-    console.log("user", user);
 
     order.save();
     req.user.clearCart();

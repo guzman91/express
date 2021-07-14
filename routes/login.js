@@ -19,6 +19,29 @@ router.post("/auth/login", async (req, res) => {
   });
 });
 
+router.post("/auth/register", async (req, res) => {
+  try {
+    const { email, password, name } = req.body;
+
+    const candidate = await User.findOne({ email });
+
+    if (candidate) {
+      res.redirect("/auth/login#register");
+    } else {
+      const user = new User({
+        email,
+        password,
+        name,
+        cart: { items: [] },
+      });
+      await user.save();
+      res.redirect("/auth/login#login");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 router.get("/auth/logout", (req, res) => {
   req.session.destroy();
 

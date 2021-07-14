@@ -10,14 +10,22 @@
   <div id="login" class="col s6 offset-s3">
     <form action="/auth/login" method="POST">
       <h3>Log In</h3>
+
       <div class="input-field col s6">
-        <input name="email" id="email" type="email" class="validate" required />
+        <input name="email" id="email" type="email" class="validate" maxlength="25" required />
         <label for="email">Email</label>
         <span class="helper-text" data-error="Please enter correct email address"></span>
       </div>
 
       <div class="input-field col s6">
-        <input name="password" id="password" type="password" class="validate" required />
+        <input
+          name="password"
+          id="password"
+          type="password"
+          class="validate"
+          maxlength="25"
+          required
+        />
         <label for="password">Password</label>
         <span class="helper-text" data-error="Please enter password"></span>
       </div>
@@ -30,15 +38,29 @@
   <div id="register" class="col s6 offset-s3">
     <form action="/auth/register" method="POST">
       <h3>Create Account</h3>
+
       <div class="input-field col s6">
-        <input name="remail" id="remail" type="email" class="validate" required />
-        <label for="remail">Email</label>
+        <input name="name" id="name" type="text" class="validate" maxlength="25" />
+        <label for="name">Name</label>
         <span class="helper-text" data-error="Please enter correct email address"></span>
       </div>
 
       <div class="input-field col s6">
-        <input name="rpassword" id="rpassword" type="password" class="validate" required />
-        <label for="rpassword">Password</label>
+        <input name="email" id="remail" type="email" class="validate" maxlength="25" required />
+        <label for="remail">Email *</label>
+        <span class="helper-text" data-error="Please enter correct email address"></span>
+      </div>
+
+      <div class="input-field col s6">
+        <input
+          name="password"
+          id="rpassword"
+          type="password"
+          class="validate"
+          maxlength="25"
+          required
+        />
+        <label for="rpassword">Password *</label>
         <span class="helper-text" data-error="Please enter password"></span>
       </div>
 
@@ -48,9 +70,10 @@
           id="rconfirm-password"
           type="password"
           class="validate"
+          maxlength="25"
           required
         />
-        <label for="rconfirm-password">Confirm Password</label>
+        <label for="rconfirm-password">Confirm Password *</label>
         <span class="helper-text" data-error="Please confirm password"></span>
       </div>
 

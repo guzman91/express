@@ -12,6 +12,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const mongoose = require("mongoose");
 const User = require("./models/user");
 const { urlencoded } = require("express");
+const user = require("./middleware/user");
 
 const userName = "jora";
 const password = "CfD1nftmCEqtX4JD";
@@ -45,6 +46,7 @@ app.use(
 );
 
 app.use(authMiddleware);
+app.use(user);
 
 const PORT = process.env.PORT || 3000;
 
