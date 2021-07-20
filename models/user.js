@@ -8,6 +8,11 @@ const userSchema = new Schema({
   name: {
     type: String,
     required: true,
+    default: "John",
+  },
+  password: {
+    type: String,
+    required: true,
   },
   cart: {
     items: [
@@ -63,9 +68,13 @@ userSchema.methods.removeFromCart = async function (course) {
 
 userSchema.methods.clearCart = async function () {
   this.cart = { items: [] };
-  this.save();
+  return this.save();
 
   //console.log("this.cart.items", this.cart.items);
+};
+
+userSchema.statics.sumTwoValues = function (a, b) {
+  return a + b;
 };
 
 module.exports = model("User", userSchema);
