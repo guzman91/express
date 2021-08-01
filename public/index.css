@@ -66,3 +66,10 @@
 .auth {
   margin-top: 1rem;
 }
+
+.warning {
+  text-align: left;
+  margin: 20px 0 15px 0;
+  border-radius: 10px;
+  color: red;
+}

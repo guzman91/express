@@ -9,6 +9,9 @@
   </div>
   <div id="login" class="col s6 offset-s3">
     <form action="/auth/login" method="POST">
+      {{#if errorLogin}}
+        <p class="warning">{{errorLogin}}</p>
+      {{/if}}
       <h3>Log In</h3>
 
       <div class="input-field col s6">
@@ -29,7 +32,7 @@
         <label for="password">Password</label>
         <span class="helper-text" data-error="Please enter password"></span>
       </div>
-
+      <input name="_csrf" type="hidden" value="{{csrf}}" />
       <button class="waves-effect waves-light btn" type="submit">Submit
       </button>
 
@@ -37,6 +40,9 @@
   </div>
   <div id="register" class="col s6 offset-s3">
     <form action="/auth/register" method="POST">
+      {{#if errorRegister}}
+        <p class="warning">{{errorRegister}}</p>
+      {{/if}}
       <h3>Create Account</h3>
 
       <div class="input-field col s6">
@@ -76,7 +82,7 @@
         <label for="rconfirm-password">Confirm Password *</label>
         <span class="helper-text" data-error="Please confirm password"></span>
       </div>
-
+      <input name="_csrf" type="hidden" value="{{csrf}}" />
       <button class="waves-effect waves-light btn" type="submit">Create
       </button>
 

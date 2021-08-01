@@ -7,6 +7,8 @@ router.get("/auth/login", (req, res) => {
   res.render("auth/login", {
     title: "Sign Up",
     isLogin: true,
+    errorLogin: req.flash("loginError"),
+    errorRegister: req.flash("registerErrors"),
   });
 });
 
@@ -23,12 +25,22 @@ router.post("/auth/login", async (req, res) => {
         req.session.isAuthenticate = true;
         req.session.save((err) => {
           if (err) console.log(err);
-          else res.redirect("/courses");
+          else {
+            res.redirect("/courses");
+          }
         });
       } else {
+        req.flash(
+          "loginError",
+          "Could not log in to the system. Please check whether email and password were entered correctly."
+        );
         res.redirect("/auth/login#login");
       }
     } else {
+      req.flash(
+        "loginError",
+        "Could not log in to the system. Please check whether email and password were entered correctly."
+      );
       res.redirect("/auth/login#login");
     }
   } catch (e) {
@@ -51,6 +63,7 @@ router.post("/auth/register", async (req, res) => {
     const candidate = await User.findOne({ email });
 
     if (candidate) {
+      req.flash("registerErrors", "This email address is already being used");
       res.redirect("/auth/login#register");
     } else {
       const hashPassword = await bcryptjs.hash(password, 10);

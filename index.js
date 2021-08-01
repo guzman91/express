@@ -4,6 +4,8 @@ const homeRouter = require("./routes/home");
 const aboutRouter = require("./routes/about");
 const coursesRouter = require("./routes/courses");
 const addRouter = require("./routes/add");
+const connectFlash = require("connect-flash");
+const csrf = require("csurf");
 const orderRouter = require("./routes/order");
 const loginRouter = require("./routes/login");
 const authMiddleware = require("./middleware/variables");
@@ -44,6 +46,8 @@ app.use(
     store,
   })
 );
+app.use(csrf());
+app.use(connectFlash());
 
 app.use(authMiddleware);
 app.use(user);

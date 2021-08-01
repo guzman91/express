@@ -17,12 +17,13 @@
   </div>
 
   <input name="id" id="id" type="hidden" class="validate" value="{{course._id}}" />
-
+  <input name="_csrf" type="hidden" value="{{csrf}}" />
   <button class="waves-effect waves-light btn" type="submit">Edit
   </button>
 </form>
 
 <form action="/courses/remove" method="POST">
+  <input name="_csrf" type="hidden" value="{{csrf}}" />
   <input name="id" id="id" type="hidden" class="validate" value="{{course._id}}" />
   <button class="btn red" type="submit">Delete
   </button>

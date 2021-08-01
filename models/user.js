@@ -62,7 +62,7 @@ userSchema.methods.removeFromCart = async function (course) {
     items[idx].count--;
   }
   this.cart = { items };
-  console.log("this.cart", this.cart);
+  // console.log("this.cart", this.cart);
   return this.save();
 };
 

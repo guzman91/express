@@ -20,6 +20,7 @@
               <a href="/courses/{{_id}}/edit?allow=true">Edit</a>
 
               <form action="/add" method="post">
+                <input name="_csrf" type="hidden" value="{{@root.csrf}}" />
                 <input type="hidden" name="id" value="{{_id}}" />
                 <button class="btn waves-effect waves-light" type="submit">Buy</button>
               </form>

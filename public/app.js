@@ -1,3 +1,5 @@
+let token = null;
+
 let toCurrency = (price) => {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -32,8 +34,15 @@ if (course) {
   course.addEventListener("click", (event) => {
     if (event.target.classList.contains("remove-btn")) {
       let id = event.target.dataset.id;
+      let csrf = event.target.dataset.csrf;
+      token = csrf;
+
       fetch("/courses/remove/" + id, {
         method: "delete",
+        headers: {
+          "XSRF-Token": token,
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
       })
         .then((response) => response.json())
         .then((res) => {
@@ -45,7 +54,7 @@ if (course) {
             <tr>
               <td>${item.title}</td>
               <td>${item.count}</td>
-              <td><a class="waves-effect waves-light btn remove-btn" data-id="${item.id}">Delete</a></td>
+              <td><a class="waves-effect waves-light btn remove-btn" data-id="${item.id}" data-csrf="${token}">Delete</a></td>
             </tr>
               `;
               return coub;

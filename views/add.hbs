@@ -14,7 +14,11 @@
           <tr>
             <td>{{title}}</td>
             <td>{{count}}</td>
-            <td><a class="waves-effect waves-light btn remove-btn" data-id="{{id}}">Delete</a></td>
+            <td><a
+                class="waves-effect waves-light btn remove-btn"
+                data-id="{{id}}"
+                data-csrf="{{@root.csrf}}"
+              >Delete</a></td>
           </tr>
 
         {{/each}}
@@ -25,6 +29,7 @@
     </div>
 
     <form action="/orders" method="post">
+      <input name="_csrf" type="hidden" value="{{csrf}}" />
       <button class="btn" type="submit">Order</button>
     </form>
   {{else}}
