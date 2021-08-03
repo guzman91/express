@@ -4,10 +4,10 @@ const Course = require("../models/course");
 
 router.get("/courses", async (req, res) => {
   let courses = await Course.find().lean();
-  //console.log("courses", courses[0]._id);
   res.render("courses", {
     title: "Courses",
     isCourses: true,
+    id: req.user ? req.user._id : null,
     courses,
   });
 });

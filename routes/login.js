@@ -1,5 +1,7 @@
 const { Router } = require("express");
 const User = require("../models/user");
+const { validationResult } = require("express-validator");
+const { validator } = require("../util/validator");
 const bcryptjs = require("bcryptjs");
 const router = Router();
 
@@ -56,9 +58,16 @@ router.post("/auth/login", async (req, res) => {
   // });
 });
 
-router.post("/auth/register", async (req, res) => {
+router.post("/auth/register", validator, async (req, res) => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, passConfirm, name } = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      req.flash("registerErrors", errors.array()[0].msg);
+      return res.status(422).redirect("/auth/login#register");
+    }
 
     const candidate = await User.findOne({ email });
 

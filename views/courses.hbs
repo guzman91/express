@@ -17,8 +17,9 @@
             <a href="/courses/{{_id}}">Open course</a>
 
             {{#if @root.isAuth}}
-              <a href="/courses/{{_id}}/edit?allow=true">Edit</a>
-
+              {{#isEqual userID @root.id}}
+                <a href="/courses/{{_id}}/edit?allow=true">Edit</a>
+              {{/isEqual}}
               <form action="/add" method="post">
                 <input name="_csrf" type="hidden" value="{{@root.csrf}}" />
                 <input type="hidden" name="id" value="{{_id}}" />

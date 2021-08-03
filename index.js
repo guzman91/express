@@ -15,16 +15,20 @@ const mongoose = require("mongoose");
 const User = require("./models/user");
 const { urlencoded } = require("express");
 const user = require("./middleware/user");
+const environment = require("./keys/index");
+const helmet = require("helmet");
+const compression = require("compression");
 
-const userName = "jora";
-const password = "CfD1nftmCEqtX4JD";
-const MongoURI = `mongodb+srv://${userName}:${password}@cluster0.n0udu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+// const userName = "jora";
+// const password = "CfD1nftmCEqtX4JD";
+// const MongoURI = `mongodb+srv://${userName}:${password}@cluster0.n0udu.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
 const app = express();
 
 const hbs = exphbs.create({
   defaultLayout: "main",
   extname: "hbs",
+  helpers: require("./util/isequal"),
 });
 
 app.engine("hbs", hbs.engine);
@@ -32,7 +36,7 @@ app.set("view engine", "hbs");
 app.set("views", "views");
 
 const store = new MongoDBStore({
-  uri: MongoURI,
+  uri: environment.MONGO_URI,
   collection: "mySessions",
 });
 
@@ -40,7 +44,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: environment.SECRET_KEY,
     resave: false,
     saveUninitialized: false,
     store,
@@ -48,6 +52,8 @@ app.use(
 );
 app.use(csrf());
 app.use(connectFlash());
+// app.use(helmet());
+app.use(compression());
 
 app.use(authMiddleware);
 app.use(user);
@@ -56,7 +62,7 @@ const PORT = process.env.PORT || 3000;
 
 async function start() {
   try {
-    await mongoose.connect(MongoURI, {
+    await mongoose.connect(environment.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,

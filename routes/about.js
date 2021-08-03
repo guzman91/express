@@ -20,7 +20,7 @@ router.post("/about", async (req, res) => {
 
   try {
     await course.save();
-    res.redirect("/about");
+    res.redirect("/courses");
   } catch (error) {
     console.log(error);
   }
